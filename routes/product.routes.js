@@ -4,13 +4,11 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const router = require("express").Router();
 
-// Display the list of all the toys for sale
-// Don't show contacts of sellers unless user is logged in
-// Maybe use handlebars for that, (if user in session, show elements)
+// Display the list of all the toys for sale -- WORKING!!!
 router.get("/", (req, res, next) => {
   Product.find()
     .then(productsArray => {
-      res.render("products/product-list", {productList: productsArray});
+      res.render("products/product-list", {productsFound: productsArray});
     })
     .catch(error => {
       console.log("There was an error getting the product list from the database:", error);
@@ -18,9 +16,39 @@ router.get("/", (req, res, next) => {
     });
 });
 
+//Get the form to create a new product
+router.get("/create", isLoggedIn, (req, res, next) => {
+    res.render("products/product-new", {userInSession: req.session.user});
+})
 
-//Get the details of a specific product
-router.get("/:productId", (req, res, next) => {
+// Send the information of the new product to the database
+router.post("/create", isLoggedIn, (req, res, next) => {
+    const newProduct = {
+        name: req.body.name,
+        price: req.body.price,
+        minAge: req.body.minAge,
+        maxAge: req.body.maxAge,
+        description: req.body.description,
+        image: req.body.image,
+        seller: req.session.user._id
+    }
+
+
+    Product.create(newProduct)
+        .then(createdProduct => {
+            res.redirect("/products");
+            
+            // res.render("products/product-details", createdProduct);
+        })
+        .catch(error => {
+            console.log("There was an error creating the new listing:", error);
+            next(error);
+        });
+
+})
+
+//Get the details of a specific product -- WORKING!!!!
+router.get("/:productId", isLoggedIn, (req, res, next) => {
     const productId = req.params.productId;
 
     Product.findById(productId)
@@ -34,42 +62,12 @@ router.get("/:productId", (req, res, next) => {
         });
 })
 
-//Get the form to create a new product
-router.get("/create", (req, res, next) => {
-    res.render("products/product-new");
-})
-
-// Send the information of the new product to the database
-router.post("/create", (req, res, next) => {
-    const newProduct = {
-        name: req.body.name,
-        price: req.body.price,
-        minAge: req.body.minAge,
-        maxAge: req.body.maxAge,
-        description: req.body.description,
-        seller: req.session.User._id
-    }
-
-
-    Product.create(newProduct)
-        .then(createdProduct => {
-            res.render("products/product-details", createdProduct);
-        })
-        .catch(error => {
-            console.log("There was an error creating the new listing:", error);
-            next(error);
-        });
-
-})
-
-
-// Get the form to edit the information of a product
-
-router.get("/:productId/edit", (req, res, next) => {
+// Get the form to edit the information of a product -- WORKING!!!
+router.get("/:productId/edit", isLoggedIn, (req, res, next) => {
     /* Insert validation trying to match the user online with the userId of the seller of the product being edited
      If it's the same, let him through, if not, redirect to failure page
 
-    if () {
+    if (req.se) {
 
     }
     */
@@ -77,7 +75,7 @@ router.get("/:productId/edit", (req, res, next) => {
     
     Product.findById(productId)
         .then(productFound => {
-            res.render("products/product-edit", productFound);
+            res.render("products/product-edit", {productFound, userInSession: req.session.user});
         })
         .catch(error => {
             console.log("There was an error getting the product information from the database:", error);
@@ -86,7 +84,7 @@ router.get("/:productId/edit", (req, res, next) => {
 })
 
 
-// Post the edited product on the database
+// Post the edited product on the database -- WORKING!!!
 router.post("/:productId/edit", (req,res,next) => {
     const productId = req.params.productId;
 
@@ -96,9 +94,10 @@ router.post("/:productId/edit", (req,res,next) => {
         minAge: req.body.minAge,
         maxAge: req.body.maxAge,
         description: req.body.description,
+        image: req.body.image
     }
 
-    Product.findByIdAndUpdate(productId, newProductInfo)
+    Product.findByIdAndUpdate(productId, newProductInfo, {new: true})
         .then(productUpdated => {
             res.render("products/product-details", productUpdated);
         })
@@ -108,13 +107,15 @@ router.post("/:productId/edit", (req,res,next) => {
         })
 })
 
-// Delete product from database
+// Delete product from database -- WORKING!!!
 router.post("/:productId/delete", (req, res, next) => {
     const productId = req.params.productId;
     
+    console.log(productId);
+
     Product.findByIdAndDelete(productId)
         .then(() => {
-            res.redirect("/products/product-list")
+            res.redirect("/auth/user-profile")
         })
 })
 

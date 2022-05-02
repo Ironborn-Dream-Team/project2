@@ -13,6 +13,7 @@ const User = require("../models/User.model");
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const Product = require("../models/Product.model");
 
 
 
@@ -137,13 +138,18 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 });
 
 
-// READ: PROFILE PAGE
+// READ: PROFILE PAGE - WORKING!!!!!!!
 router.get('/user-profile', isLoggedIn, (req, res) => {
-  res.render('users/user-profile', { userInSession: req.session.user });
+
+
+  Product.find({seller: req.session.user._id})
+    .then(productsFound => {
+      res.render('users/user-profile', { userInSession: req.session.user, productsFound: productsFound});
+    })
 });
 
 
-// UPDATE: PROFILE PAGE
+// UPDATE: PROFILE PAGE - WORKING !!!!!!!!!!!
 router.get('/user-profile/edit', isLoggedIn, (req, res) => {
   res.render('users/user-edit', { userInSession: req.session.user });
 });
@@ -151,14 +157,18 @@ router.get('/user-profile/edit', isLoggedIn, (req, res) => {
 
 router.post('/user-profile/edit', isLoggedIn, (req, res, next) => {
   const idToEdit = req.session.user._id;
+  
+
   const newInfo = {
     username: req.body.username,
-    numberPhone: "req.body.numberPhone",
+    numberPhone: req.body.numberPhone,
     address: req.body.address
   };
-  console.log("newInfo    : ", newInfo)
-  User.findByIdAndUpdate(idToEdit, newInfo)
-    .then(() => {
+
+
+  User.findByIdAndUpdate(idToEdit, newInfo, {new: true})
+    .then(updatedUser => {
+      req.session.user = updatedUser;
       res.redirect("/auth/user-profile");
     })
     .catch(err => {
@@ -167,7 +177,7 @@ router.post('/user-profile/edit', isLoggedIn, (req, res, next) => {
     });
 });
 
-// LOGOUT
+// LOGOUT - WORKING!!!!
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {

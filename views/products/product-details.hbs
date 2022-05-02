@@ -1,4 +1,17 @@
 <h1>{{name}}</h1>
 
-<h2>{{price}}€</h2>
+<h2>Sold by: {{seller.username}}</h2>
+
+<h2>Price: {{price}}€</h2>
+
+<h3>min Age: {{minAge}}</h3>
+
+<h3>max Age: {{maxAge}}</h3>
+
+<p>description: {{description}}</p>
+
+<img src="{{image}}" alt="">
+
+
+<form action="/products/{{_id}}/delete" method="POST"> <button>Delete</button></form>
 

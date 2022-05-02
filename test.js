@@ -10,7 +10,7 @@ const saltRounds = 10;
 
 
 
-let password = "pass123";
+let password = "bestpassword";
 
 bcrypt
       .genSalt(saltRounds)

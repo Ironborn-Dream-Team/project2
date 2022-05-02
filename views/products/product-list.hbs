@@ -1,7 +1,8 @@
-{{#each products}}
-<div>
-{{!-- <img src="" alt=""> --}}
-<h3>{{name}}</h3>
-<h4>Price: {{price}}</h4>
-</div>
-{{/each}}
+ <ul class=" list-group mt-2 mb-2 p-2 fs-6">
+    {{#each productsFound}}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <a href="/products/{{this._id}}">{{this.name}}</a>
+      <span class="badge bg-danger rounded-pill">{{this.price}} €</span>
+    </li>
+    {{/each}}
+  </ul>

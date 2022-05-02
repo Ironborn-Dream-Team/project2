@@ -1,0 +1,88 @@
+<h1>CREATE YOUR PRODUCT</h1>
+
+{{#if userInSession}}
+
+
+<div class="container">
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body">
+        <form action="/products/create" method="post">
+          <div class="row ">
+            <div class="col-sm-3  d-flex align-items-center">
+              <h6 class="mb-0">Name:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input name="name" type="text" class="form-control" value="">
+            </div>
+          </div>
+
+
+          <div class="row mb-3">
+            <div class="col-sm-3  d-flex align-items-center">
+              <h6 class="mb-0">Price:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input name="price" type="number" class="form-control" value="">
+            </div>
+          </div>
+
+
+          <div class="row mb-3">
+            <div class="col-sm-3  d-flex align-items-center">
+              <h6 class="mb-0">Minimum Age:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input name="minAge" type="number" class="form-control" value="">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-sm-3  d-flex align-items-center">
+              <h6 class="mb-0">Maximim Age:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input name="maxAge" type="number" class="form-control" value="">
+            </div>
+          </div>
+
+           <div class="row mb-3">
+            <div class="col-sm-3  d-flex align-items-center">
+              <h6 class="mb-0">Description:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input name="description" type="textarea" class="form-control" value="">
+            </div>
+            
+             <div class="row mb-3">
+            <div class="col-sm-3  d-flex align-items-center">
+              <h6 class="mb-0">Image:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input name="image" type="text" class="form-control" value="">
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-3 "></div>
+            <div class="col-sm-9 text-secondary">
+              <button class="btn btn-danger px-4">Create</button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+{{else}}
+<p>Still no logged in user, sorry!</p>
+{{/if}}
