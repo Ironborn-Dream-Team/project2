@@ -11,12 +11,16 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+<<<<<<< HEAD
     password: {
       type: String,
       required: [true, "Password is required"],
     },
     numberPhone: String,
     address: String,
+=======
+    password: "$2b$10$R8Qs0nwXLOxW3y3.P.ZsteqmNWkjZNPitbqWQHM0rXWOJqdoT4oMO",
+>>>>>>> 86223cc68e7c140a9c4a34398075d104702e3320
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
