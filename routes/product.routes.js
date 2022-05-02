@@ -2,6 +2,7 @@ const Product = require("../models/Product.model");
 const User = require("../models/User.model");
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
+const isOwner = require("../middleware/isOwner");
 const router = require("express").Router();
 
 // Display the list of all the toys for sale -- WORKING!!!
@@ -47,6 +48,11 @@ router.post("/create", isLoggedIn, (req, res, next) => {
 
 })
 
+// Blocking page for when user doesn't have access to change
+router.get("/error", (req, res, next) => {
+    res.render("products/product-error");
+})
+
 //Get the details of a specific product -- WORKING!!!!
 router.get("/:productId", isLoggedIn, (req, res, next) => {
     const productId = req.params.productId;
@@ -63,7 +69,7 @@ router.get("/:productId", isLoggedIn, (req, res, next) => {
 })
 
 // Get the form to edit the information of a product -- WORKING!!!
-router.get("/:productId/edit", isLoggedIn, (req, res, next) => {
+router.get("/:productId/edit", isLoggedIn, isOwner, (req, res, next) => {
     /* Insert validation trying to match the user online with the userId of the seller of the product being edited
      If it's the same, let him through, if not, redirect to failure page
 
@@ -85,7 +91,7 @@ router.get("/:productId/edit", isLoggedIn, (req, res, next) => {
 
 
 // Post the edited product on the database -- WORKING!!!
-router.post("/:productId/edit", (req,res,next) => {
+router.post("/:productId/edit", isLoggedIn, isOwner, (req,res,next) => {
     const productId = req.params.productId;
 
     const newProductInfo = {
@@ -99,7 +105,7 @@ router.post("/:productId/edit", (req,res,next) => {
 
     Product.findByIdAndUpdate(productId, newProductInfo, {new: true})
         .then(productUpdated => {
-            res.render("products/product-details", productUpdated);
+            res.render("products/product-edit", {productUpdated, userInSession: req.session.user});
         })
         .catch(error => {
             console.log("There was an error updating the product information on the database:", error);
@@ -108,7 +114,7 @@ router.post("/:productId/edit", (req,res,next) => {
 })
 
 // Delete product from database -- WORKING!!!
-router.post("/:productId/delete", (req, res, next) => {
+router.post("/:productId/delete", isLoggedIn, isOwner, (req, res, next) => {
     const productId = req.params.productId;
     
     console.log(productId);
@@ -118,5 +124,7 @@ router.post("/:productId/delete", (req, res, next) => {
             res.redirect("/auth/user-profile")
         })
 })
+
+
 
 module.exports = router;
