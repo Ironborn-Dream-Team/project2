@@ -1,14 +1,23 @@
+<h2>Login</h2>
+
 <form action="/auth/login" method="POST">
-   <label> Username
-      <input type="text" name="username">
-   </label>
-   <label> Password
-      <input type="password" name="password">
+
+   <label> Email
+      <input type="email" name="email" placeholder="rockstar@ironhack.com" required />
    </label>
 
-   <button type="submit">Submit</button>
+   <label> Password
+      <input type="password" name="password" placeholder="********" required />
+   </label>
+
+   <button type="submit">Login</button>
+
+
+   <div class="info">
+      <p>If you don't have an account, click <a href="/auth/signup">here</a> to create one.</p>
+   </div>
 </form>
 
 {{#if errorMessage}}
-   {{errorMessage}}
+{{errorMessage}}
 {{/if}}

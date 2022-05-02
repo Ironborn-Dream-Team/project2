@@ -8,7 +8,7 @@ require("./db");
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
- 
+
 
 // Handles the handlebars 
 // https://www.npmjs.com/package/hbs
@@ -24,12 +24,19 @@ const projectName = "project2";
 
 app.locals.appTitle = `${capitalized(projectName)} created with IronLauncher`;
 
+app.use((req, res, next) => {
+  res.locals.session = req.session; // allow access to session data from layout.hbs
+  next()
+});
+
 // 👇 Start handling routes here
 const index = require("./routes/index.routes");
 app.use("/", index);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
+
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
