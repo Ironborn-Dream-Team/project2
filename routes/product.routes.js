@@ -42,7 +42,7 @@ router.post("/create", upload.array('images', 5), isLoggedIn, (req, res, next) =
         minAge: req.body.minAge,
         maxAge: req.body.maxAge,
         description: req.body.description,
-        images: images, // images: [('/' + req.files[0].path),...]
+        images: images,
         seller: req.session.user._id
     }
 
@@ -52,7 +52,7 @@ router.post("/create", upload.array('images', 5), isLoggedIn, (req, res, next) =
         .then(createdProduct => {
             // res.redirect("/products");
             console.log(createdProduct)
-            res.render("products/product-details", createdProduct);
+            res.render("products/product-details", { productFound: createdProduct });
         })
         .catch(error => {
             console.log("There was an error creating the new listing:", error);
@@ -95,6 +95,7 @@ router.get("/:productId/edit", isLoggedIn, isOwner, (req, res, next) => {
 
     Product.findById(productId)
         .then(productFound => {
+            console.log(productFound)
             res.render("products/product-edit", { productFound, userInSession: req.session.user });
         })
         .catch(error => {
@@ -105,8 +106,13 @@ router.get("/:productId/edit", isLoggedIn, isOwner, (req, res, next) => {
 
 
 // Post the edited product on the database -- WORKING!!!
-router.post("/:productId/edit", upload.single('image'), isLoggedIn, isOwner, (req, res, next) => {
+router.post("/:productId/edit", upload.array('images', 5), isLoggedIn, isOwner, (req, res, next) => {
     const productId = req.params.productId;
+
+    var images = [];
+    req.files.forEach(file => {
+        images.push('/' + file.path)
+    });
 
     const newProductInfo = {
         name: req.body.name,
@@ -114,16 +120,18 @@ router.post("/:productId/edit", upload.single('image'), isLoggedIn, isOwner, (re
         minAge: req.body.minAge,
         maxAge: req.body.maxAge,
         description: req.body.description,
-        image: '/' + req.file.path,
+        images: images,
     }
-    // console.log(newProductInfo)
+    console.log(newProductInfo.images)
 
     Product.findByIdAndUpdate(productId, newProductInfo, { new: true })
         .then(productUpdated => {
-            // res.render("products/product-details", { productUpdated, userInSession: req.session.user });
+            console.log(productUpdated)
             res.redirect(`/products/${productUpdated._id}`)
             // res.render("products/product-edit", {productUpdated, userInSession: req.session.user});
             // res.render("products/product-details", productUpdated);
+            // res.render("products/product-details", { productUpdated, userInSession: req.session.user });
+
         })
         .catch(error => {
             console.log("There was an error updating the product information on the database:", error);

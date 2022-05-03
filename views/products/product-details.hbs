@@ -4,13 +4,13 @@
 
 <h2>Price: {{productFound.price}}€</h2>
 
-<h3>Min Age: {{minAge}}</h3>
+<h3>Min Age: {{productFound.minAge}}</h3>
 
-<h3>Max Age: {{maxAge}}</h3>
+<h3>Max Age: {{productFound.maxAge}}</h3>
 
-<p>Description: {{description}}</p>
+<p>Description: {{productFound.description}}</p>
 
-{{#each images}}
+{{#each productFound.images}}
 <p> <img src="{{this}}" alt=""> </p>
 {{/each}}
 
@@ -18,8 +18,8 @@
 <form action="/products/{{productFound._id}}/edit"><button>Edit</button></form>
 {{#if isFavourite}}
 <form action="/products/{{productFound._id}}/removefavourite" method="POST"><button id="remove-favourite">Remove from
-    Favourites!</button></form>
+        Favourites!</button></form>
 {{else}}
 <form action="/products/{{productFound._id}}/addfavourite" method="POST"><button id="add-favourite">Add to
-    Favourites!</button></form>
+        Favourites!</button></form>
 {{/if}}
