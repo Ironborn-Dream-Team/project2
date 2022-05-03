@@ -43,15 +43,15 @@ router.post("/create", upload.array('images', 5), isLoggedIn, (req, res, next) =
         maxAge: req.body.maxAge,
         description: req.body.description,
         images: images, // images: [('/' + req.files[0].path),...]
-        seller: req.session.user._id
+        seller: req.session.user._id,
+        category: req.body.category
     }
 
-    console.log(newProduct);
+
 
     Product.create(newProduct)
         .then(createdProduct => {
             // res.redirect("/products");
-            console.log(createdProduct)
             res.render("products/product-details", createdProduct);
         })
         .catch(error => {
@@ -66,7 +66,17 @@ router.get("/error", (req, res, next) => {
     res.render("products/product-error");
 })
 
+// Showing search Results
+router.get("/search", (req, res, next) => {
+    const searchInput = req.query.searchInput;
 
+    // Using the mongoose operator to include regular expressions in the queries. Search for all the elements
+    // that include nintendo on the name
+    Product.find({name: { "$regex": `${searchInput}`, "$options": "i" }})
+        .then(searchResults => {
+            res.render("products/product-search-results", {searchResults: searchResults});
+        })
+})
 
 //Get the details of a specific product -- WORKING!!!!
 router.get("/:productId", isLoggedIn, (req, res, next) => {

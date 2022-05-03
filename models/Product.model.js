@@ -18,6 +18,10 @@ const productSchema = new Schema(
         seller: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
+        },
+        category: {
+            type: String,
+            enum: ["dolls", "lego", "video games", "baby", "puzzles", "other"]
         }
     },
     {
