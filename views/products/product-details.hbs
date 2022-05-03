@@ -4,20 +4,19 @@
 
 <h2>Price: {{price}}€</h2>
 
-<h3>min Age: {{minAge}}</h3>
+<h3>Min Age: {{minAge}}</h3>
 
-<h3>max Age: {{maxAge}}</h3>
+<h3>Max Age: {{maxAge}}</h3>
 
-<p>description: {{description}}</p>
+<p>Description: {{description}}</p>
 
-<img src="{{image}}" alt="">
+
+{{#each images}}
+<p> <img src="{{this}}" alt=""> </p>
+{{/each}}
+
 
 
 <form action="/products/{{_id}}/delete" method="POST"><button>Delete</button></form>
 <form action="/products/{{_id}}/edit"><button>Edit</button></form>
 <form action="/products/{{_id}}/favourite"><button id="test-button" value="{{_id}}">Add to Favourites!</button></form>
-
-
-
-
-

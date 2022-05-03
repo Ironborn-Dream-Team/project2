@@ -14,7 +14,7 @@ const productSchema = new Schema(
         minAge: Number,
         maxAge: Number,
         description: String,
-        image: String,
+        images: [String],
         seller: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
