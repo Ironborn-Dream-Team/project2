@@ -20,7 +20,8 @@ const products = [
         maxAge: 99,
         description: "Super nintendo lego set with super mario bros playing on the lego tv.",
         image: "https://i.imgur.com/J4SCojU.jpg",
-        seller: "626fa16f2b4ec3f17b3f102e"
+        // seller: "626fa16f2b4ec3f17b3f102e"
+        seller: "626fbd2fd9f1e7eda48c250e"
     },
     {
         name: "Action Man - Aqua Blaster",
@@ -29,7 +30,8 @@ const products = [
         maxAge: 99,
         description: "Action man aqua blaster action figure. In tip top shape. Still with original box.",
         image: "https://i.imgur.com/9RA8dYT.jpg",
-        seller: "626fa16f2b4ec3f17b3f102f"
+        // seller: "626fa16f2b4ec3f17b3f102f"
+        seller: "626fbd2fd9f1e7eda48c250f"
     },
     {
         name: "Barbie Doll - Vacation",
@@ -38,7 +40,8 @@ const products = [
         maxAge: 10,
         description: "Barbie doll on vacation will all stickers and accessories.",
         image: "https://i.imgur.com/zlG7CHb.jpg",
-        seller: "626fa16f2b4ec3f17b3f1030"
+        // seller: "626fa16f2b4ec3f17b3f1030"
+        seller: "626fbd2fd9f1e7eda48c2510"
     },
     {
         name: "Blue's Clues Plush",
@@ -47,7 +50,8 @@ const products = [
         maxAge: 10,
         description: "Blues Clues collectible plush! If your kid is having the blues, I'll give you some clues! Get the Blues Clues to end the blues!",
         image: "https://i.imgur.com/W5FbWuP.jpg",
-        seller: "626fa16f2b4ec3f17b3f1030"
+        // seller: "626fa16f2b4ec3f17b3f1030"
+        seller: "626fbd2fd9f1e7eda48c2510"
     }
 ]
 
