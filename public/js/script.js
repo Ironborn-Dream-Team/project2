@@ -5,3 +5,12 @@ document.addEventListener(
   },
   false
 );
+
+// Favourite Handling
+const testButton = document.getElementById("test-button")
+
+testButton.addEventListener("click", (clickEvent) => {
+  // var productId = testButton.value;
+  
+  // Update the appearance of the favourite button
+});

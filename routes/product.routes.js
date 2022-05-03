@@ -2,6 +2,7 @@ const Product = require("../models/Product.model");
 const User = require("../models/User.model");
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
+const addFavourite = require("../middleware/addFavourite");
 const isOwner = require("../middleware/isOwner");
 const router = require("express").Router();
 
@@ -52,6 +53,8 @@ router.post("/create", isLoggedIn, (req, res, next) => {
 router.get("/error", (req, res, next) => {
     res.render("products/product-error");
 })
+
+
 
 //Get the details of a specific product -- WORKING!!!!
 router.get("/:productId", isLoggedIn, (req, res, next) => {
@@ -125,6 +128,19 @@ router.post("/:productId/delete", isLoggedIn, isOwner, (req, res, next) => {
         })
 })
 
+router.get("/:productID/favourite", (req, res, next) => {
+    // addFavourite({productId: req.params.productID, userId: req.session.user._id});
+
+    const productId = req.params.productID;
+    const userId = req.session.user._id;
+
+
+    User.findByIdAndUpdate(userId, {$push: {favourites: productId}})
+        .then(() => {
+            res.redirect("/products");
+        })
+        .catch()
+})
 
 
 module.exports = router;

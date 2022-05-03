@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { default: mongoose } = require("mongoose");
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema(
@@ -17,6 +18,10 @@ const userSchema = new Schema(
     },
     numberPhone: String,
     address: String,
+    favourites: {
+      type: mongoose.Schema.Types.Array,
+      ref: "Product"
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

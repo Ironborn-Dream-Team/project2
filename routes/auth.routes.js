@@ -141,7 +141,6 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 // READ: PROFILE PAGE - WORKING!!!!!!!
 router.get('/user-profile', isLoggedIn, (req, res) => {
 
-
   Product.find({seller: req.session.user._id})
     .then(productsFound => {
       res.render('users/user-profile', { userInSession: req.session.user, productsFound: productsFound});
