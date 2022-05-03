@@ -140,10 +140,17 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 
 // READ: PROFILE PAGE - WORKING!!!!!!!
 router.get('/user-profile', isLoggedIn, (req, res) => {
+  let sellerProducts;
 
   Product.find({seller: req.session.user._id})
     .then(productsFound => {
-      res.render('users/user-profile', { userInSession: req.session.user, productsFound: productsFound});
+      sellerProducts = productsFound;
+      // This query gives us an object with 2 keys: Id of the user and an array of favourites.
+      return User.findById(req.session.user._id, "favourites").populate("favourites");
+    })
+    .then(favourites => {
+      //we have to do favouritesArray: favourites.favourites so we can put on the hbs just the favourites array we got on the query, without the userId.
+      res.render('users/user-profile', {userInSession: req.session.user, sellerProducts: sellerProducts, favouritesArray: favourites.favourites});
     })
 });
 

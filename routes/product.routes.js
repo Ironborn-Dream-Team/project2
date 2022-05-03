@@ -65,11 +65,17 @@ router.get("/error", (req, res, next) => {
 //Get the details of a specific product -- WORKING!!!!
 router.get("/:productId", isLoggedIn, (req, res, next) => {
     const productId = req.params.productId;
+    const userFavourites = req.session.user.favourites;
+    let isFavourite = false;
+
+    if(userFavourites.find(favourite => favourite = productId)){
+        isFavourite = true;
+    }
 
     Product.findById(productId)
         .populate("seller")
         .then(productFound => {
-            res.render("products/product-details", productFound);
+            res.render("products/product-details", {productFound: productFound, isFavourite: isFavourite});
         })
         .catch(error => {
             console.log("There was an error getting the product information from the database:", error);
@@ -79,13 +85,6 @@ router.get("/:productId", isLoggedIn, (req, res, next) => {
 
 // Get the form to edit the information of a product -- WORKING!!!
 router.get("/:productId/edit", isLoggedIn, isOwner, (req, res, next) => {
-    /* Insert validation trying to match the user online with the userId of the seller of the product being edited
-     If it's the same, let him through, if not, redirect to failure page
- 
-    if (req.se) {
- 
-    }
-    */
     const productId = req.params.productId;
 
     Product.findById(productId)
@@ -134,21 +133,54 @@ router.post("/:productId/delete", isLoggedIn, isOwner, (req, res, next) => {
         .then(() => {
             res.redirect("/auth/user-profile")
         })
+        .catch(error => {
+            console.log("There was an error deleting the product information on the database:", error);
+            next(error);
+        })
 })
 
-router.get("/:productID/favourite", (req, res, next) => {
+router.post("/:productID/addfavourite", (req, res, next) => {
     // addFavourite({productId: req.params.productID, userId: req.session.user._id});
 
     const productId = req.params.productID;
     const userId = req.session.user._id;
 
-
-    User.findByIdAndUpdate(userId, {$push: {favourites: productId}})
-        .then(() => {
-            res.redirect("/products");
+    User.findByIdAndUpdate(userId, {$push: {favourites: productId}}, {new: true})
+        .then(updatedUser => {
+            req.session.user = updatedUser;
+            return Product.findById(productId);
         })
-        .catch()
+        .then(productFromDb => {
+           return productFromDb.populate("seller");
+        })
+        .then(productFound => {
+            res.render("products/product-details", {productFound: productFound, isFavourite: true});
+        })
+        .catch(error => {
+            console.log("There was an error adding the product to the favourites:", error);
+            next(error);
+        })
 })
 
+router.post("/:productID/removefavourite", (req, res, next) => {
+    const productId = req.params.productID;
+    const userId = req.session.user._id;
+
+    User.findByIdAndUpdate(userId, {$pull: {favourites: productId}}, {new: true})
+        .then(updatedUser => {
+            req.session.user = updatedUser;
+            return Product.findById(productId);
+        })
+        .then(productFromDb => {
+           return productFromDb.populate("seller");
+        })
+        .then(productFound => {
+            res.render("products/product-details",{productFound: productFound, isFavourite: false});
+        })
+        .catch(error => {
+            console.log("There was an error adding the product to the favourites:", error);
+            next(error);
+        })
+})
 
 module.exports = router;
