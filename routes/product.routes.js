@@ -69,10 +69,29 @@ router.get("/error", (req, res, next) => {
 router.get("/search", (req, res, next) => {
     const searchInput = req.query.searchInput;
 
+    const searchTerms = {
+        name: { "$regex": `${searchInput}`, "$options": "i" },
+        price: {$gte: req.query.minPrice, $lte: req.query.maxPrice},
+        minAge: {$gte: req.query.minAge},
+        maxAge: {$lte: req.query.maxAge},
+        category: req.query.category
+    }
+
+    if (req.query.category === "null") delete searchTerms.category;
+
+    // Improve if found way to pass null values for minAge and maxAge
+    // for (const key in searchTerms) {
+    //     console.log(searchTerms[key]);
+    //     if (searchTerms[key] === "null") delete searchTerms[key];
+    // }
+
+    console.log(searchTerms);
+
     // Using the mongoose operator to include regular expressions in the queries. Search for all the elements
     // that include nintendo on the name
-    Product.find({name: { "$regex": `${searchInput}`, "$options": "i" }})
+    Product.find(searchTerms)
         .then(searchResults => {
+            console.log(searchResults);
             res.render("products/product-search-results", {searchResults: searchResults});
         })
 })

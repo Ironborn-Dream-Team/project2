@@ -5,5 +5,57 @@
 <form action="/products/search" method="GET" class="navbar navbar-expand-lg navbar-light bg-light">
   <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchInput">
   <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search</button>
+  
+  
+  <label> Category:
+    <select name="category">
+      <option value="null">Category</option>
+      <option value="dolls">Dolls</option>
+      <option value="lego">Lego</option>
+      <option value="video games">Video Games</option>
+      <option value="baby">Baby</option>
+      <option value="puzzles">Puzzles</option>
+      <option value="other">Other</option>
+    </select>
+  </label>
+  <label> Minimum Price:
+    <select name="minPrice">
+      <option value="0">Minimum</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="75">75</option>
+      <option value="100">100</option>
+    </select>
+  </label>
+  <label> Maximum Price:
+    <select name="maxPrice">
+      <option value="9999999">Maximum</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="75">75</option>
+      <option value="100">100</option>
+    </select>
+  </label>
+<label> Minimum Age:
+    <select name="minAge">
+      <option value="0">Minimum</option>
+      <option value="0">0</option>
+      <option value="10">1</option>
+      <option value="25">5</option>
+      <option value="50">9</option>
+      <option value="75">12</option>
+    </select>
+  </label>
+  <label> Maximum Age:
+    <select name="maxAge">
+      <option value="9999">Maximum</option>
+      <option value="10">1</option>
+      <option value="25">5</option>
+      <option value="50">9</option>
+      <option value="75">12</option>
+    </select>
+  </label>
 </form>
 
