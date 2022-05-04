@@ -123,20 +123,36 @@
     <h1>Deal of the day</h1>
   </div>
 
+
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
+
       <div class="carousel-item active" data-bs-interval="1000">
+        <div class="carousel-caption">
+          <a href="/products/{{productsFound.[0]._id}}" class="btn btn-danger">More details</a>
+        </div>
+
         <img src="{{productsFound.[0].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="640"
           height="640">
       </div>
+
       <div class="carousel-item" data-bs-interval="2000">
+        <div class="carousel-caption">
+          <a href="/products/{{productsFound.[1]._id}}" class="btn btn-danger">More details</a>
+        </div>
+
         <img src="{{productsFound.[1].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="640"
           height="640">
       </div>
+
       <div class="carousel-item" data-bs-interval="3000">
+        <div class="carousel-caption">
+          <a href="/products/{{productsFound.[2]._id}}" class="btn btn-danger">More details</a>
+        </div>
         <img src="{{productsFound.[2].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="640"
           height="640">
       </div>
+
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
