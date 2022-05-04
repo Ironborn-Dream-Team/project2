@@ -1,3 +1,25 @@
+#remove-favourite {
+  background-image: url("../images/heart-full.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-color: transparent;
+  height: 50px;
+  width: 50px;
+  border: none;
+}
+
+#add-favourite {
+  background-image: url("../images/heart-empty.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-color: transparent;
+  height: 50px;
+  width: 50px;
+  border: none;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;

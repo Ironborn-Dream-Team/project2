@@ -2,12 +2,13 @@ const Product = require("../models/Product.model");
 const User = require("../models/User.model");
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
-const addFavourite = require("../middleware/addFavourite");
+const searchQuery = require("../middleware/searchQuery");
 const isOwner = require("../middleware/isOwner");
 const router = require("express").Router();
 
 // To upload image 
 const multer = require('multer');
+
 const upload = multer({ dest: 'public/images/uploads/' })
 
 
@@ -66,29 +67,10 @@ router.get("/error", (req, res, next) => {
 })
 
 // Showing search Results
-router.get("/search", (req, res, next) => {
-    const searchInput = req.query.searchInput;
+router.get("/search", searchQuery, (req, res, next) => {
+    // req.searchInfo is being added on the searchQuery Middleware
+    const searchTerms = req.searchInfo;
 
-    const searchTerms = {
-        name: { "$regex": `${searchInput}`, "$options": "i" },
-        price: {$gte: req.query.minPrice, $lte: req.query.maxPrice},
-        minAge: {$gte: req.query.minAge},
-        maxAge: {$lte: req.query.maxAge},
-        category: req.query.category
-    }
-
-    if (req.query.category === "null") delete searchTerms.category;
-
-    // Improve if found way to pass null values for minAge and maxAge
-    // for (const key in searchTerms) {
-    //     console.log(searchTerms[key]);
-    //     if (searchTerms[key] === "null") delete searchTerms[key];
-    // }
-
-    console.log(searchTerms);
-
-    // Using the mongoose operator to include regular expressions in the queries. Search for all the elements
-    // that include nintendo on the name
     Product.find(searchTerms)
         .then(searchResults => {
             console.log(searchResults);
@@ -100,6 +82,8 @@ router.get("/search", (req, res, next) => {
 router.get("/:productId", isLoggedIn, (req, res, next) => {
     const productId = req.params.productId;
     const userFavourites = req.session.user.favourites;
+    let isCreator;
+
     let isFavourite = false;
 
     if (userFavourites.find(favourite => favourite = productId)) {
@@ -109,7 +93,10 @@ router.get("/:productId", isLoggedIn, (req, res, next) => {
     Product.findById(productId)
         .populate("seller")
         .then(productFound => {
-            res.render("products/product-details", { productFound: productFound, isFavourite: isFavourite });
+
+            if(productFound.seller.id === req.session.user._id) isCreator = true;
+            
+            res.render("products/product-details", { productFound: productFound, isFavourite: isFavourite, isCreator: isCreator});
         })
         .catch(error => {
             console.log("There was an error getting the product information from the database:", error);
@@ -182,10 +169,9 @@ router.post("/:productId/delete", isLoggedIn, isOwner, (req, res, next) => {
 })
 
 router.post("/:productID/addfavourite", (req, res, next) => {
-    // addFavourite({productId: req.params.productID, userId: req.session.user._id});
-
     const productId = req.params.productID;
     const userId = req.session.user._id;
+    let isCreator;
 
     User.findByIdAndUpdate(userId, { $push: { favourites: productId } }, { new: true })
         .then(updatedUser => {
@@ -196,7 +182,10 @@ router.post("/:productID/addfavourite", (req, res, next) => {
             return productFromDb.populate("seller");
         })
         .then(productFound => {
-            res.render("products/product-details", { productFound: productFound, isFavourite: true });
+
+            if(productFound.seller.id === req.session.user.id) isCreator = true;
+
+            res.render("products/product-details", { productFound: productFound, isFavourite: true, isCreator: isCreator });
         })
         .catch(error => {
             console.log("There was an error adding the product to the favourites:", error);
@@ -207,6 +196,7 @@ router.post("/:productID/addfavourite", (req, res, next) => {
 router.post("/:productID/removefavourite", (req, res, next) => {
     const productId = req.params.productID;
     const userId = req.session.user._id;
+    let isCreator;
 
     User.findByIdAndUpdate(userId, { $pull: { favourites: productId } }, { new: true })
         .then(updatedUser => {
@@ -217,7 +207,9 @@ router.post("/:productID/removefavourite", (req, res, next) => {
             return productFromDb.populate("seller");
         })
         .then(productFound => {
-            res.render("products/product-details", { productFound: productFound, isFavourite: false });
+            if(productFound.seller.id === req.session.user.id) isCreator = true;
+
+            res.render("products/product-details", { productFound: productFound, isFavourite: false, isCreator: isCreator });
         })
         .catch(error => {
             console.log("There was an error adding the product to the favourites:", error);

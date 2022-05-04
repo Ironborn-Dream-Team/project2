@@ -3,45 +3,49 @@
 
 <br> <br>
 
-<div class="container">
+<form class="container-fluid" id="search-form">
   <div class="row">
-    <div class="col-sm">
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Categories</option>
+    <div class="form-group col">
+      <select name="category" class="form-control" aria-label="Default select example">
+        <option value="null" selected>Categories</option>
         <option value="dolls">Dolls</option>
         <option value="lego">Lego</option>
-        <option value="video games">Video Games</option>
+        <option value="videoGames">Video Games</option>
         <option value="baby">Baby</option>
         <option value="puzzles">Puzzles</option>
         <option value="other">Other</option>
       </select>
     </div>
-    <div class="col-sm">
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Price</option>
+    <div class="form-group col">
+      <select name="price" class="form-control" aria-label="Default select example">
+        <option value="null" selected>Price</option>
         <option value="lowPrice">0 - 20€</option>
         <option value="averagePrice">20 - 100€</option>
         <option value="expensive">> 100€</option>
       </select>
     </div>
-    <div class="col-sm">
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Age</option>
-        <option value="1">0 - 5</option>
-        <option value="2">5 - 10</option>
-        <option value="3">> 10</option>
+    <div class="form-group col">
+      <select name="minAge" class="form-control" aria-label="Default select example">
+        <option value="null" selected>Min. Age</option>
+        <option value="0">0</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+    <div class="form-group col">
+      <select name="maxAge" class="form-control" aria-label="Default select example">
+        <option value="null" selected>Max. Age</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
       </select>
     </div>
   </div>
-
-  <div class="col-sm">
-    <form action="/products/search" method="GET" class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="form-group form-row">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchInput">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search</button>
-    </form>
   </div>
-
-</div>
+  <button formmethod="get" formaction="/products/search" class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search</button>
+</form>
 
 <hr>
 

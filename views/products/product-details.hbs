@@ -12,15 +12,16 @@
 
 
 {{#each productFound.images}}
-<p> <img src="{{this}}" alt=""> </p>
+<p><img src="{{this}}" alt=""> </p>
 {{/each}}
 
-<form action="/products/{{productFound._id}}/delete" method="POST"><button>Delete</button></form>
-<form action="/products/{{productFound._id}}/edit"><button>Edit</button></form>
+{{#if isCreator}}
+<form action="/products/{{productFound._id}}/delete" method="POST"><button type="button" class="btn btn-danger px-3 me-2">Delete</button></form>
+<form action="/products/{{productFound._id}}/edit"><button type="button" class="btn btn-danger px-3 me-2">Edit</button></form>
+{{/if}}
+
 {{#if isFavourite}}
-<form action="/products/{{productFound._id}}/removefavourite" method="POST"><button id="remove-favourite">Remove
-        from Favourites!</button></form>
+<form action="/products/{{productFound._id}}/removefavourite" method="POST"><button id="remove-favourite"></button></form>
 {{else}}
-<form action="/products/{{productFound._id}}/addfavourite" method="POST"><button id="add-favourite">Add to
-        Favourites!</button></form>
+<form action="/products/{{productFound._id}}/addfavourite" method="POST"><button id="add-favourite"></button></form>
 {{/if}}

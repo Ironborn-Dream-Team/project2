@@ -1,39 +1,41 @@
-<h1>USER PROFILE</h1>
 
-{{#if userInSession}}
-<h2>Welcome, {{ userInSession.username }}!</h2>
+<div class="container mb-3">
+  <h1>USER PROFILE</h1>
 
+  {{#if userInSession}}
+  <h2>Welcome, {{ userInSession.username }}!</h2>
+</div>
 
 <div class="container">
   <div class="col-lg-4">
     <div class="card">
       <div class="card-body">
 
-        <div class="row ">
+        <div class="row mb-3">
           <div class="col-sm-3  d-flex align-items-center">
-            <h6 class="mb-0">Full Name</h6>
+            <h6 class="mb-2">Name</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            <input type="text" class="form-control" value="{{ userInSession.username }}">
+            <h6 class="mb-2">{{ userInSession.username }}</h6>
           </div>
         </div>
 
         <div class="row mb-3">
           <div class="col-sm-3  d-flex align-items-center">
-            <h6 class="mb-0">Email</h6>
+            <h6 class="mb-2">Email</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            <input type="text" class="form-control" value="{{ userInSession.email }}">
+            <h6 class="mb-2">{{ userInSession.email }}</h6>
           </div>
         </div>
 
 
         <div class="row mb-3">
           <div class="col-sm-3  d-flex align-items-center">
-            <h6 class="mb-0">Number Phone</h6>
+            <h6 class="mb-2">Number Phone</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            <input type="text" class="form-control" value="{{ userInSession.numberPhone }}">
+            <h6 class="mb-2">{{ userInSession.numberPhone }}</h6>
           </div>
         </div>
 
@@ -43,7 +45,7 @@
             <h6 class="mb-0">Address</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            <input type="text" class="form-control" value="{{userInSession.address}}">
+            <h6 class="mb-2">{{ userInSession.address }}</h6>
           </div>
         </div>
 
