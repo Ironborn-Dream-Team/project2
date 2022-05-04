@@ -1,14 +1,15 @@
 <h1>{{productFound.name}}</h1>
 
-<h2>Sold by: {{productFound.seller.username}}</h2>
+<h4>Sold by: {{productFound.seller.username}}</h4>
 
-<h2>Price: {{productFound.price}}€</h2>
+<h5>Price: {{productFound.price}}€</h5>
 
-<h3>Min Age: {{productFound.minAge}}</h3>
+<h5>Min Age: {{productFound.minAge}}</h5>
 
-<h3>Max Age: {{productFound.maxAge}}</h3>
+<h5>Max Age: {{productFound.maxAge}}</h5>
 
 <p>Description: {{productFound.description}}</p>
+
 
 {{#each productFound.images}}
 <p> <img src="{{this}}" alt=""> </p>
@@ -17,8 +18,8 @@
 <form action="/products/{{productFound._id}}/delete" method="POST"><button>Delete</button></form>
 <form action="/products/{{productFound._id}}/edit"><button>Edit</button></form>
 {{#if isFavourite}}
-<form action="/products/{{productFound._id}}/removefavourite" method="POST"><button id="remove-favourite">Remove from
-        Favourites!</button></form>
+<form action="/products/{{productFound._id}}/removefavourite" method="POST"><button id="remove-favourite">Remove
+        from Favourites!</button></form>
 {{else}}
 <form action="/products/{{productFound._id}}/addfavourite" method="POST"><button id="add-favourite">Add to
         Favourites!</button></form>

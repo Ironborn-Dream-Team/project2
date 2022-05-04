@@ -24,7 +24,9 @@ router.get("/", (req, res, next) => {
         });
 });
 
-//Get the form to create a new product
+
+
+// Get the form to create a new product -- WORKING!!!
 router.get("/create", isLoggedIn, (req, res, next) => {
     res.render("products/product-new", { userInSession: req.session.user });
 })
@@ -42,12 +44,10 @@ router.post("/create", upload.array('images', 5), isLoggedIn, (req, res, next) =
         minAge: req.body.minAge,
         maxAge: req.body.maxAge,
         description: req.body.description,
-        images: images, 
+        images: images,
         seller: req.session.user._id,
         category: req.body.category
     }
-
-
 
     Product.create(newProduct)
         .then(createdProduct => {
@@ -117,6 +117,8 @@ router.get("/:productId", isLoggedIn, (req, res, next) => {
         });
 })
 
+
+
 // Get the form to edit the information of a product -- WORKING!!!
 router.get("/:productId/edit", isLoggedIn, isOwner, (req, res, next) => {
     const productId = req.params.productId;
@@ -156,10 +158,6 @@ router.post("/:productId/edit", upload.array('images', 5), isLoggedIn, isOwner, 
         .then(productUpdated => {
             console.log(productUpdated)
             res.redirect(`/products/${productUpdated._id}`)
-            // res.render("products/product-edit", {productUpdated, userInSession: req.session.user});
-            // res.render("products/product-details", productUpdated);
-            // res.render("products/product-details", { productUpdated, userInSession: req.session.user });
-
         })
         .catch(error => {
             console.log("There was an error updating the product information on the database:", error);
@@ -226,5 +224,20 @@ router.post("/:productID/removefavourite", (req, res, next) => {
             next(error);
         })
 })
+
+
+// Display the list of each category -- WORKING!!!
+const categories = ["dolls", "lego", "videoGames", "baby", "puzzles", "other"]
+for (let i = 0; i < categories.length; i++) {
+    router.get(`/categories/${categories[i]}`, (req, res, next) => {
+        Product.find({ category: [categories[i]] })
+            .then(dollsArray => {
+                console.log(dollsArray)
+                res.render("products/product-categories", { productsFound: dollsArray });
+            })
+            .catch(error => error);
+    })
+}
+
 
 module.exports = router;

@@ -21,7 +21,7 @@ const users = [
     username: "Suzanne",
     email: "suzanne@gmail.com",
     password: "$2b$10$TYxBPEY5Hjtc393G2FWT/ePf7Rdj0JCMAzYICWIjZYLR2Ez1jxDpm", // suzy123
-    numberPhone: 0142464364364,
+    numberPhone: 330612902724,
     address: "Paris",
     timestamps: true
   },
@@ -29,15 +29,15 @@ const users = [
     username: "Bob",
     email: "bob@gmail.com",
     password: "$2b$10$I2H0swrwp.piDsK5wgVfO.gsJNEswKYHmFyCJDPPSDjzUB09imiOG", // bobbybob
-    numberPhone: 5356765323456,
-    address: "Cannes",
+    numberPhone: 3510625638242,
+    address: "Lisbonne",
     timestamps: true
   },
   {
     username: "Claire",
     email: "claire@gmail.com",
     password: "$2b$10$hhlRSJjZZ/2Kk.VAmkDHh.0NdgyTve.THNwRmCejvXgOQ66V5p012", // bestpassword
-    numberPhone: 46535696332345,
+    numberPhone: 330958458242,
     address: "Lyon",
     timestamps: true
   },

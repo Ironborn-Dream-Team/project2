@@ -20,8 +20,8 @@ const productSchema = new Schema(
             ref: "User"
         },
         category: {
-            type: String,
-            enum: ["dolls", "lego", "video games", "baby", "puzzles", "other"]
+            type: [String],
+            enum: ["dolls", "lego", "videoGames", "baby", "puzzles", "other"]
         }
     },
     {
