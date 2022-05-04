@@ -12,7 +12,6 @@ const multer = require('multer');
 const upload = multer({ dest: 'public/images/uploads/' })
 
 
-
 // Display the list of all the toys for sale -- WORKING!!!
 router.get("/", (req, res, next) => {
     Product.find()
@@ -24,7 +23,6 @@ router.get("/", (req, res, next) => {
             next(error);
         });
 });
-
 
 
 // Get the form to create a new product -- WORKING!!!
@@ -74,7 +72,7 @@ router.get("/search", searchQuery, (req, res, next) => {
     Product.find(searchTerms)
         .then(searchResults => {
             console.log(searchResults);
-            res.render("products/product-search-results", {searchResults: searchResults});
+            res.render("products/product-search-results", { searchResults: searchResults });
         })
 })
 
@@ -218,18 +216,21 @@ router.post("/:productID/removefavourite", (req, res, next) => {
 })
 
 
+
 // Display the list of each category -- WORKING!!!
 const categories = ["dolls", "lego", "videoGames", "baby", "puzzles", "other"]
 for (let i = 0; i < categories.length; i++) {
     router.get(`/categories/${categories[i]}`, (req, res, next) => {
         Product.find({ category: [categories[i]] })
-            .then(dollsArray => {
-                console.log(dollsArray)
-                res.render("products/product-categories", { productsFound: dollsArray });
+            .then(categoryArray => {
+                // console.log(categoryArray)
+                res.render("products/product-categories", { productsFound: categoryArray });
             })
             .catch(error => error);
     })
 }
+
+
 
 
 module.exports = router;
