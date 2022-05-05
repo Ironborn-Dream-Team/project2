@@ -1,23 +1,69 @@
-<h1>{{productFound.name}}</h1>
+<main class="container rounded p-5 mt-3 d-flex justify-content-center" style="background:  #f0b9bf;">
+        <div class="card rounded" style="width: 70rem;">
+                <div class="row border-bottom mb-3 mt-4 mx-auto" style="width: 1000px;" id="title">
 
-{{#if isFavourite}}
-<form action="/products/{{productFound._id}}/removefavourite" method="POST"><button id="remove-favourite"></button>
-</form>
-{{else}}
-<form action="/products/{{productFound._id}}/addfavourite" method="POST"><button id="add-favourite"></button></form>
-{{/if}}
+                        <h1 style="font-family:'Courier New', Courier, monospace;">{{productFound.name}}</h1>
 
-<div class="container">
-        <div class="col-lg-4">
-                <div class="card">
-                        <div class="card-body">
+                        {{#if isFavourite}}
+                        <form action="/products/{{productFound._id}}/removefavourite" method="POST"><button
+                                        id="remove-favourite"></button>
+                        </form>
+                        {{else}}
+                        <form action="/products/{{productFound._id}}/addfavourite" method="POST"><button
+                                        id="add-favourite"></button></form>
+                        {{/if}}
+                </div>
 
-                                <div class="row ">
-                                        <div class="col-sm-3  d-flex align-items-center">
-                                                <h6 class="mb-0">Sold by</h6>
+                <div class="row mx-auto border-bottom" style="width: 1000px;">
+                        {{!-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                        {{#each productFound.images}}
+                                        <div class="carousel-item active" data-bs-interval="1000">
+                                                <img src="{{this}}" class="d-block h-auto" height="20" alt="">
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                                <h6 class="mb-2 form-control">{{ productFound.seller.username }}</h6>
+                                        {{/each}}
+                                </div>
+
+                                <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                </button>
+                        </div> --}}
+
+
+                        {{#each productFound.images}}
+                        <div class="card p-2 mb-3 " style="width: 25rem;">
+                                <img src="{{this}}" class="card-img-top" alt="...">
+                        </div>
+                        {{/each}}
+
+                </div>
+
+                <div class="card-body">
+
+                        <div class="row border-bottom mx-auto pb-2" style="width: 1000px;" id="title">
+
+                                <h3 class="text-danger">Description</h3>
+                                <p> {{productFound.description}} </p>
+
+                        </div>
+
+
+                        <div class="row border-bottom mt-3 mx-auto pb-2" style="width: 1000px;" id="title">
+
+                                <h3 class="text-danger">Contact us</h3>
+                                <div class="row">
+                                        <div class="col-sm-3 d-flex align-items-center">
+                                                <h6 class="mb-0">Sold by </h6>
+                                        </div>
+                                        <div class="col-sm-3 text-secondary">
+                                                <h6 class="mb-2">{{ productFound.seller.username }}</h6>
                                         </div>
                                 </div>
 
@@ -26,7 +72,7 @@
                                                 <h6 class="mb-0">Number Phone</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                                <h6 class="mb-2 form-control">{{ productFound.seller.numberPhone }}</h6>
+                                                <h6 class="mb-2">{{ productFound.seller.numberPhone }}</h6>
                                         </div>
                                 </div>
 
@@ -35,7 +81,7 @@
                                                 <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                                <h6 class="mb-2 form-control">{{ productFound.seller.email }}</h6>
+                                                <h6 class="mb-2">{{ productFound.seller.email }}</h6>
                                         </div>
                                 </div>
 
@@ -44,51 +90,50 @@
                                                 <h6 class="mb-0">Address</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                                <h6 class="mb-2 form-control">{{ productFound.seller.address }}</h6>
+                                                <h6 class="mb-2">{{ productFound.seller.address }}</h6>
                                         </div>
                                 </div>
 
-                                <div class="row mb-3">
+                        </div>
+
+                        <div class="row border-bottom mt-3 mx-auto pb-2" style="width: 1000px;" id="title">
+
+                                <h3 class="text-danger">Details</h3>
+
+                                <div class="row">
                                         <div class="col-sm-3  d-flex align-items-center">
                                                 <h6 class="mb-0">Price</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                                <h6 class="mb-2 form-control">{{ productFound.price}} €</h6>
+                                                <h6 class="mb-2">{{ productFound.price}} €</h6>
                                         </div>
                                 </div>
 
 
-                                <div class="row mb-3">
+                                <div class="row">
                                         <div class="col-sm-3  d-flex align-items-center">
                                                 <h6 class="mb-0">Min Age</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                                <h6 class="mb-2 form-control">{{productFound.minAge}}</h6>
+                                                <h6 class="mb-2">{{productFound.minAge}}</h6>
                                         </div>
                                 </div>
 
 
-                                <div class="row mb-3">
+                                <div class="row">
                                         <div class="col-sm-3  d-flex align-items-center">
                                                 <h6 class="mb-0">Max Age</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                                <h6 class="mb-2 form-control">{{productFound.maxAge}}</h6>
+                                                <h6 class="mb-2">{{productFound.maxAge}}</h6>
                                         </div>
                                 </div>
 
 
-                                <div class="row mb-3">
-                                        <div class="col-sm-3  d-flex align-items-center">
-                                                <h6 class="mb-0">Description</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                                <textarea name="description" class="form-control" cols="30"
-                                                        rows="5">{{productFound.description}}</textarea>
-                                        </div>
-                                </div>
+                        </div>
 
 
+                        <div class="row mt-3 mx-auto pb-2" style="width: 1000px;" id="title">
                                 <div class="row">
                                         {{#if isCreator}}
                                         <div class="col d-flex justify-content-center">
@@ -104,16 +149,11 @@
                                         </div>
                                         {{/if}}
                                 </div>
-
-
                         </div>
-                </div>
 
+
+                </div>
         </div>
 
-</div>
 
-<br> <br>
-{{#each productFound.images}}
-<p><img src="{{this}}" alt="" width="640" height="640"> </p>
-{{/each}}
+</main>
