@@ -2,6 +2,7 @@ const Product = require("../models/Product.model");
 const User = require("../models/User.model");
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
+const formValidation = require("../middleware/formValidation");
 const searchQuery = require("../middleware/searchQuery");
 const isOwner = require("../middleware/isOwner");
 const router = require("express").Router();
@@ -31,26 +32,12 @@ router.get("/create", isLoggedIn, (req, res, next) => {
 })
 
 // Send the information of the new product to the database
-router.post("/create", upload.array('images', 5), isLoggedIn, (req, res, next) => {
-    var images = [];
-    req.files.forEach(file => {
-        images.push('/' + file.path)
-    });
-
-    const newProduct = {
-        name: req.body.name,
-        price: req.body.price,
-        minAge: req.body.minAge,
-        maxAge: req.body.maxAge,
-        description: req.body.description,
-        images: images,
-        seller: req.session.user._id,
-        category: req.body.category
-    }
+router.post("/create", upload.array('images', 5), isLoggedIn, formValidation, (req, res, next) => {
+    const newProduct = req.Product;
 
     Product.create(newProduct)
         .then(createdProduct => {
-            res.render("products/product-details", { productFound: createdProduct });
+            res.redirect(`/products/${createdProduct._id}`);
         })
         .catch(error => {
             console.log("There was an error creating the new listing:", error);
@@ -121,23 +108,10 @@ router.get("/:productId/edit", isLoggedIn, isOwner, (req, res, next) => {
 
 
 // Post the edited product on the database -- WORKING!!!
-router.post("/:productId/edit", upload.array('images', 5), isLoggedIn, isOwner, (req, res, next) => {
+router.post("/:productId/edit", upload.array('images', 5), isLoggedIn, isOwner, formValidation, (req, res, next) => {
     const productId = req.params.productId;
 
-    var images = [];
-    req.files.forEach(file => {
-        images.push('/' + file.path)
-    });
-
-    const newProductInfo = {
-        name: req.body.name,
-        price: req.body.price,
-        minAge: req.body.minAge,
-        maxAge: req.body.maxAge,
-        description: req.body.description,
-        images: images,
-    }
-    console.log(newProductInfo.images)
+    const newProductInfo = req.Product;
 
     Product.findByIdAndUpdate(productId, newProductInfo, { new: true })
         .then(productUpdated => {

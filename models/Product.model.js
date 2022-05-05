@@ -5,11 +5,11 @@ const productSchema = new Schema(
     {
         name: {
             type: String,
-            required: true
+            required: [true, "Name is required."]
         },
         price: {
             type: Number,
-            required: true
+            required: [true, "Price is required."]
         },
         minAge: Number,
         maxAge: Number,

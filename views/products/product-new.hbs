@@ -13,7 +13,7 @@
               <h6 class="mb-0">Name:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input name="name" type="text" class="form-control" value="">
+              <input name="name" type="text" class="form-control" value="{{newProduct.name}}" required> {{#if errorMessageName}}{{errorMessageName}}{{/if}}
             </div>
           </div>
 
@@ -23,7 +23,7 @@
               <h6 class="mb-0">Price:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input name="price" type="number" class="form-control" value="">
+              <input name="price" type="number" class="form-control" value="{{newProduct.price}}" required> {{#if errorMessagePrice}}{{errorMessagePrice}}{{/if}}
             </div>
           </div>
 
@@ -33,7 +33,7 @@
               <h6 class="mb-0">Minimum Age:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input name="minAge" type="number" class="form-control" value="">
+              <input name="minAge" type="number" class="form-control" value="{{newProduct.minAge}}">
             </div>
           </div>
 
@@ -42,7 +42,7 @@
               <h6 class="mb-0">Maximim Age:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input name="maxAge" type="number" class="form-control" value="">
+              <input name="maxAge" type="number" class="form-control" value="{{newProduct.maxAge}}">
             </div>
           </div>
 
@@ -51,7 +51,9 @@
               <h6 class="mb-0">Category:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
+              {{#if errorMessageCategory}}{{errorMessageCategory}}{{/if}}
               <select name="category">
+                  <option value="null" selected>Select a Category</option>
                   <option value="dolls">Dolls</option>
                   <option value="lego">Lego</option>
                   <option value="video games">Video Games</option>
@@ -66,7 +68,7 @@
               <h6 class="mb-0">Description:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input name="description" type="textarea" class="form-control" value="">
+              <input name="description" type="textarea" class="form-control" value="{{newProduct.description}}">
             </div>
 
 
@@ -76,7 +78,7 @@
               </div>
               <div class="col-sm-9 text-secondary">
                 <input name="images" type="file" accept="image/png, image/jpg, image/jpeg, image/gif, image/bmp"
-                  class="form-control" value="" multiple>
+                  class="form-control" value="{{newProduct.images}}" multiple>
               </div>
             </div>
 
