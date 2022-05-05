@@ -154,10 +154,10 @@ router.post("/:productID/addfavourite", (req, res, next) => {
             return productFromDb.populate("seller");
         })
         .then(productFound => {
-            console.log("Product seller id : " + productFromDb.seller._id);
+            console.log("Product seller id : " + productFound.seller._id);
             console.log("User in session id: " + req.session.user._id);
             console.log("User favourites: " + req.session.user.favourites);
-            
+
             res.redirect(`/products/${productId}`);
         })
         .catch(error => {
@@ -180,7 +180,7 @@ router.post("/:productID/removefavourite", (req, res, next) => {
             return productFromDb.populate("seller");
         })
         .then(productFound => {
-            console.log("Product seller id : " + productFromDb.seller._id);
+            console.log("Product seller id : " + productFound.seller._id);
             console.log("User in session id: " + req.session.user._id);
             console.log("User favourites: " + req.session.user.favourites);
 
