@@ -154,10 +154,7 @@ router.post("/:productID/addfavourite", (req, res, next) => {
             return productFromDb.populate("seller");
         })
         .then(productFound => {
-
-            if(productFound.seller._id == req.session.user._id) isCreator = true;
-
-            res.render("products/product-details", { productFound: productFound, isFavourite: true, isCreator: isCreator });
+            res.redirect(`/products/${productId}`);
         })
         .catch(error => {
             console.log("There was an error adding the product to the favourites:", error);
@@ -179,9 +176,7 @@ router.post("/:productID/removefavourite", (req, res, next) => {
             return productFromDb.populate("seller");
         })
         .then(productFound => {
-            if(productFound.seller._id == req.session.user._id) isCreator = true;
-
-            res.render("products/product-details", { productFound: productFound, isFavourite: false, isCreator: isCreator });
+            res.redirect(`/products/${productId}`);
         })
         .catch(error => {
             console.log("There was an error adding the product to the favourites:", error);
