@@ -92,7 +92,7 @@ router.get("/:productId", isLoggedIn, (req, res, next) => {
         .populate("seller")
         .then(productFound => {
 
-            if(productFound.seller.id === req.session.user._id) isCreator = true;
+            if(productFound.seller._id == req.session.user._id) isCreator = true;
             
             res.render("products/product-details", { productFound: productFound, isFavourite: isFavourite, isCreator: isCreator});
         })
@@ -181,7 +181,7 @@ router.post("/:productID/addfavourite", (req, res, next) => {
         })
         .then(productFound => {
 
-            if(productFound.seller.id === req.session.user.id) isCreator = true;
+            if(productFound.seller._id == req.session.user._id) isCreator = true;
 
             res.render("products/product-details", { productFound: productFound, isFavourite: true, isCreator: isCreator });
         })
@@ -205,7 +205,7 @@ router.post("/:productID/removefavourite", (req, res, next) => {
             return productFromDb.populate("seller");
         })
         .then(productFound => {
-            if(productFound.seller.id === req.session.user.id) isCreator = true;
+            if(productFound.seller._id == req.session.user._id) isCreator = true;
 
             res.render("products/product-details", { productFound: productFound, isFavourite: false, isCreator: isCreator });
         })
