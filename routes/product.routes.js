@@ -71,7 +71,7 @@ router.get("/:productId", isLoggedIn, (req, res, next) => {
 
     let isFavourite = false;
 
-    if (userFavourites.find(favourite => favourite = productId)) {
+    if (userFavourites.find(favourite => favourite === productId)) {
         isFavourite = true;
     }
 
