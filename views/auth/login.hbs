@@ -1,22 +1,44 @@
-<h2>Login</h2>
+<div class="container d-flex justify-content-center align-items-center m-5">
+   <div class="card p-3">
+      <div class="row">
 
-<form action="/auth/login" method="POST">
-
-   <label> Email
-      <input type="email" name="email" placeholder="rockstar@ironhack.com" required />
-   </label>
-
-   <label> Password
-      <input type="password" name="password" placeholder="********" required />
-   </label>
-
-   <button type="submit">Login</button>
+         <div class="col-md-6">
+            <div class="form">
+               <h2>Login</h2>
 
 
-   <div class="info">
-      <p>If you don't have an account, click <a href="/auth/signup">here</a> to create one.</p>
+               <form action="/auth/login" method="POST">
+
+                  <div class="inputbox mt-3">
+                     <span>Email</span>
+                     <input type="email" placeholder="Email" name="email" class="form-control" required>
+                  </div>
+
+                  <div class="inputbox mt-3">
+                     <span>Password</span>
+                     <input type="password" placeholder="********" name="password" class="form-control" required>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                     <div class="text-right">
+                        <button type="submit" class="btn btn-danger register btn-block">Login</button>
+                     </div>
+                  </div>
+               </form>
+
+            </div>
+         </div>
+
+
+         <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <div class="text-center"> <img src="/public/images/kidzone.png" width="200">
+            </div>
+         </div>
+
+
+      </div>
    </div>
-</form>
+</div>
 
 {{#if errorMessage}}
 {{errorMessage}}
