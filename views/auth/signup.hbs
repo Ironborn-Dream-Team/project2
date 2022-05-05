@@ -1,34 +1,66 @@
-<h2>Signup</h2>
+<div class="container d-flex justify-content-center align-items-center m-5">
+   <div class="card  p-3">
+      <div class="row">
 
-<form action="/auth/signup" method="POST">
+         <div class="col-md-6">
+            <div class="form">
+               <h2>Signup</h2>
 
-   <label> Email
-      <input type="email" name="email" placeholder="email@gmail.com" required />
-   </label>
 
-   <label> Password
-      <input type="password" name="password" placeholder="********" required />
-   </label>
+               <form action="/auth/signup" method="POST">
+                  <div class="inputbox mt-3">
+                     <span>Your Name</span>
+                     <input type="text" placeholder="Name" name="username" class="form-control">
+                  </div>
 
-   <label> Full Name:
-      <input type="text" name="username" />
-   </label>
+                  <div class="inputbox mt-3">
+                     <span>Email</span>
+                     <input type="email" placeholder="Email" name="email" class="form-control" required>
+                  </div>
 
-   <label> Number Phone:
-      <input type="text" name="numberPhone" />
-   </label>
+                  <div class="inputbox mt-3">
+                     <span>Password</span>
+                     <input type="password" placeholder="********" name="password" class="form-control" required>
+                  </div>
 
-   <label> Address:
-      <input type="text" name="address" />
-   </label>
+                  <div class="inputbox mt-3">
+                     <span>Phone</span>
+                     <input type="text" placeholder="+33 455 445 4532" name="numberPhone" class="form-control">
+                  </div>
 
-   <button type="submit">Create account</button>
+                  <div class="inputbox mt-3">
+                     <span>Address</span>
+                     <input type="text" placeholder="Your address" name="address" class="form-control">
+                  </div>
 
-   <div class="info">
-      <p>Already have an account? Click <a href="/auth/login">here</a> to login.</p>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                     <div class="text-right">
+                        <button type="submit" class="btn btn-success register btn-block">Register</button>
+                     </div>
+                  </div>
+                  <br><br>
+                  <div class="d-flex justify-content-between align-items-center">
+                     <p>Already have an account? Click <a href="/auth/login">here</a> to login.</p>
+                  </div>
+
+               </form>
+
+            </div>
+         </div>
+
+
+         <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <div class="text-center"> <img src="/public/images/how_to_raise_happy_fuss_free_kids.webp" width="300">
+            </div>
+         </div>
+
+
+      </div>
    </div>
+</div>
 
-</form>
+
 
 {{#if errorMessage}}
 {{errorMessage}}
