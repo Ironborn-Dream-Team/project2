@@ -44,22 +44,21 @@
   <div class="form-group form-row">
     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchInput">
   </div>
-  <button formmethod="get" formaction="/products/search" class="btn btn-outline-success my-2 my-sm-0" type="submit">
-    Search</button>
+  <button formmethod="get" formaction="/products/search" class="btn my-2 my-sm-0 btn-danger" type="submit">Search</button>
 </form>
 
 <hr>
 
 <main class="container">
 
-  <div class="row text-left">
+  <div class="container mb-5 mt-5 text-center">
     <h2><strong> Show all categories</strong></h2>
   </div>
 
   <section class="row d-flex align-items-end text-center">
 
-    <div class="card col-lg-2 mb-3">
-      <img src="../public/images/Dolls-Orange.jpg" class="card-img-bottom d-inline-block" alt="Dolls" width="50"
+    <div class="card col mb-3 h-100 w-auto">
+      <img src="../public/images/Dolls-Orange.jpg" class="card-img-bottom d-inline-block h-100 w-auto" alt="Dolls" width="50"
         height="200">
       <div class="card-body">
         <h5 class="card-title">Dolls</h5>
@@ -68,8 +67,8 @@
     </div>
 
 
-    <div class="card col-lg-2 mb-3">
-      <img src="../public/images/lego-train.jpg" class=" card-img-bottom d-inline-block" alt="Lego" width="50"
+    <div class="card col mb-3 h-100 w-auto">
+      <img src="../public/images/lego-train.jpg" class=" card-img-bottom d-inline-block h-100 w-auto" alt="Lego" width="50"
         height="200">
       <div class="card-body">
         <h5 class="card-title">Lego</h5>
@@ -78,8 +77,8 @@
     </div>
 
 
-    <div class="card col-lg-2 mb-3">
-      <img src="../public/images/videoGame-ps2.jpg" class="card-img-bottom d-inline-block" alt="Video Games" width="50"
+    <div class="card col mb-3 h-100 w-auto">
+      <img src="../public/images/videoGame-ps2.jpg" class="card-img-bottom d-inline-block h-100 w-auto" alt="Video Games" width="50"
         height="200">
       <div class="card-body">
         <h5 class="card-title">Video Games</h5>
@@ -88,8 +87,8 @@
     </div>
 
 
-    <div class="card col-lg-2 mb-3">
-      <img src="../public/images/baby-manipulation-eveil.jpg" class="card-img-bottom d-inline-block" alt="Baby"
+    <div class="card col mb-3 h-100 w-auto">
+      <img src="../public/images/baby-manipulation-eveil.jpg" class="card-img-bottom d-inline-block h-100 w-auto" alt="Baby"
         width="50" height="200">
       <div class="card-body">
         <h5 class="card-title">Baby</h5>
@@ -98,8 +97,8 @@
     </div>
 
 
-    <div class="card col-lg-2 mb-3">
-      <img src="../public/images/puzzle-france.jpg" class="card-img-bottom d-inline-block" alt="Puzzles" width="50"
+    <div class="card col mb-3">
+      <img src="../public/images/puzzle-france.jpg" class="card-img-bottom d-inline-block h-100 w-auto" alt="Puzzles" width="50"
         height="200">
       <div class="card-body">
         <h5 class="card-title">Puzzles</h5>
@@ -108,8 +107,8 @@
     </div>
 
 
-    <div class="card col-lg-2 mb-3">
-      <img src="../public/images/orther-tchoupi.jpg" class="card-img-bottom d-inline-block" alt="Other" width="50"
+    <div class="card col mb-3">
+      <img src="../public/images/orther-tchoupi.jpg" class="card-img-bottom d-inline-block h-100 w-auto" alt="Other" width="50"
         height="200">
       <div class="card-body">
         <h5 class="card-title">Other</h5>
@@ -122,40 +121,35 @@
 </main>
 
 <hr>
-<main class="container">
+<main class="container w-50 mb-5">
 
-  <div class="row text-left">
+  <div class=" container mb-5 mt-5 text-center">
     <h2><strong>Deal of the day</strong></h2>
   </div>
 
 
-  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div id="carouselExampleInterval" class="carousel slide justify-content-center" data-bs-ride="carousel">
     <div class="carousel-inner">
-
       <div class="carousel-item active" data-bs-interval="1000">
         <div class="carousel-caption">
-          <a href="/products/{{productsFound.[0]._id}}" class="btn btn-danger">More details</a>
+          <a href="/products/{{this.[0].id}}" class="btn btn-danger">More details</a>
         </div>
-
-        <img src="{{productsFound.[0].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="600"
-          height="600">
+        <img src="{{this.[0].images.[0]}}" class="d-block w-100" alt="{{this.[0].name}}">
       </div>
 
       <div class="carousel-item" data-bs-interval="2000">
         <div class="carousel-caption">
-          <a href="/products/{{productsFound.[1]._id}}" class="btn btn-danger">More details</a>
+          <a href="/products/{{this.[1]._id}}" class="btn btn-danger">More details</a>
         </div>
 
-        <img src="{{productsFound.[1].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="600"
-          height="600">
+        <img src="{{this.[1].images.[0]}}" class="d-block w-100" alt="{{this.[0].name}}">
       </div>
 
       <div class="carousel-item" data-bs-interval="3000">
         <div class="carousel-caption">
-          <a href="/products/{{productsFound.[2]._id}}" class="btn btn-danger">More details</a>
+          <a href="/products/{{this.[2]._id}}" class="btn btn-danger">More details</a>
         </div>
-        <img src="{{productsFound.[2].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="600"
-          height="600">
+        <img src="{{this.[2].images.[0]}}" class="d-block w-100" alt="{{this.[0].name}}">
       </div>
 
     </div>
