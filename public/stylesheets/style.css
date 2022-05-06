@@ -45,3 +45,7 @@ select {
   display: block;
   margin: 0.5rem 0 1rem;
 }
+
+.carousel .carousel-item {
+  height: 500px;
+}
