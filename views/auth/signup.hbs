@@ -7,6 +7,10 @@
                <h2>Signup</h2>
 
 
+               {{#if errorMessage}}
+               {{errorMessage}}
+               {{/if}}
+
                <form action="/auth/signup" method="POST">
                   <div class="inputbox mt-3">
                      <span>Your Name</span>
@@ -61,7 +65,3 @@
 </div>
 
 
-
-{{#if errorMessage}}
-{{errorMessage}}
-{{/if}}

@@ -5,7 +5,9 @@
          <div class="col-md-6">
             <div class="form">
                <h2>Login</h2>
-
+               {{#if errorMessage}}
+                  <span>{{errorMessage}}</span>
+               {{/if}}
 
                <form action="/auth/login" method="POST">
 
@@ -39,7 +41,3 @@
       </div>
    </div>
 </div>
-
-{{#if errorMessage}}
-{{errorMessage}}
-{{/if}}
