@@ -8,7 +8,7 @@ router.get("/", (req, res, next) => {
       const shuffled = [...productsArray].sort(() => 0.5 - Math.random());
       const arrRandom = shuffled.slice(0, 3);
       // console.log("shuffled     ", shuffled.length)
-      res.render("index", { productsFound: arrRandom });
+      res.render("index", arrRandom );
     })
     .catch(error => error);
 })

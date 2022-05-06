@@ -44,15 +44,14 @@
   <div class="form-group form-row">
     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchInput">
   </div>
-  <button formmethod="get" formaction="/products/search" class="btn btn-outline-success my-2 my-sm-0" type="submit">
-    Search</button>
+  <button formmethod="get" formaction="/products/search" class="btn my-2 my-sm-0 btn-danger" type="submit">Search</button>
 </form>
 
 <hr>
 
 <main class="container">
 
-  <div class="row text-left">
+  <div class="container mb-5 mt-5 text-center">
     <h2><strong> Show all categories</strong></h2>
   </div>
 
@@ -136,40 +135,35 @@
 </main>
 
 <hr>
-<main class="container">
+<main class="container w-50 mb-5">
 
-  <div class="row text-left">
+  <div class=" container mb-5 mt-5 text-center">
     <h2><strong>Deal of the day</strong></h2>
   </div>
 
 
-  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div id="carouselExampleInterval" class="carousel slide justify-content-center" data-bs-ride="carousel">
     <div class="carousel-inner">
-
       <div class="carousel-item active" data-bs-interval="1000">
         <div class="carousel-caption">
-          <a href="/products/{{productsFound.[0]._id}}" class="btn btn-danger">More details</a>
+          <a href="/products/{{this.[0].id}}" class="btn btn-danger">More details</a>
         </div>
-
-        <img src="{{productsFound.[0].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="600"
-          height="600">
+        <img src="{{this.[0].images.[0]}}" class="d-block w-100" alt="{{this.[0].name}}">
       </div>
 
       <div class="carousel-item" data-bs-interval="2000">
         <div class="carousel-caption">
-          <a href="/products/{{productsFound.[1]._id}}" class="btn btn-danger">More details</a>
+          <a href="/products/{{this.[1]._id}}" class="btn btn-danger">More details</a>
         </div>
 
-        <img src="{{productsFound.[1].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="600"
-          height="600">
+        <img src="{{this.[1].images.[0]}}" class="d-block w-100" alt="{{this.[0].name}}">
       </div>
 
       <div class="carousel-item" data-bs-interval="3000">
         <div class="carousel-caption">
-          <a href="/products/{{productsFound.[2]._id}}" class="btn btn-danger">More details</a>
+          <a href="/products/{{this.[2]._id}}" class="btn btn-danger">More details</a>
         </div>
-        <img src="{{productsFound.[2].images.[0]}}" class="d-block w-10" alt="{{productsFound.[0].name}}" width="600"
-          height="600">
+        <img src="{{this.[2].images.[0]}}" class="d-block w-100" alt="{{this.[0].name}}">
       </div>
 
     </div>
