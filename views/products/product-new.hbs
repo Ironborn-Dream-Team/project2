@@ -1,4 +1,4 @@
-<h1>CREATE YOUR PRODUCT</h1>
+<h2 class="mt-5">CREATE YOUR PRODUCT</h2>
 
 {{#if userInSession}}
 
@@ -13,7 +13,8 @@
               <h6 class="mb-0">Name:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input name="name" type="text" class="form-control" value="{{newProduct.name}}" required> {{#if errorMessageName}}{{errorMessageName}}{{/if}}
+              <input name="name" type="text" class="form-control" value="{{newProduct.name}}" required> {{#if
+              errorMessageName}}{{errorMessageName}}{{/if}}
             </div>
           </div>
 
@@ -23,7 +24,8 @@
               <h6 class="mb-0">Price:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input name="price" type="number" class="form-control" value="{{newProduct.price}}" required> {{#if errorMessagePrice}}{{errorMessagePrice}}{{/if}}
+              <input name="price" type="number" class="form-control" value="{{newProduct.price}}" required> {{#if
+              errorMessagePrice}}{{errorMessagePrice}}{{/if}}
             </div>
           </div>
 
@@ -53,42 +55,42 @@
             <div class="col-sm-9 text-secondary">
               {{#if errorMessageCategory}}{{errorMessageCategory}}{{/if}}
               <select name="category">
-                  <option value="null" selected>Select a Category</option>
-                  <option value="dolls">Dolls</option>
-                  <option value="lego">Lego</option>
-                  <option value="video games">Video Games</option>
-                  <option value="baby">Baby</option>
-                  <option value="puzzles">Puzzles</option>
-                  <option value="other">Other</option>
+                <option value="null" selected>Select a Category</option>
+                <option value="dolls">Dolls</option>
+                <option value="lego">Lego</option>
+                <option value="video games">Video Games</option>
+                <option value="baby">Baby</option>
+                <option value="puzzles">Puzzles</option>
+                <option value="other">Other</option>
               </select>
             </div>
 
-          <div class="row mb-3">
-            <div class="col-sm-3  d-flex align-items-center">
-              <h6 class="mb-0 mr-2">Description:</h6>
-            </div>
-            <div class="col-sm-9 text-secondary">
-              <input name="description" type="textarea" class="form-control" value="{{newProduct.description}}">
-            </div>
-
-
             <div class="row mb-3">
               <div class="col-sm-3  d-flex align-items-center">
-                <h6 class="mb-0">Image:</h6>
+                <h6 class="mb-0 mr-2">Description:</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input name="images" type="file" accept="image/png, image/jpg, image/jpeg, image/gif, image/bmp"
-                  class="form-control" value="{{newProduct.images}}" multiple>
+                <input name="description" type="textarea" class="form-control" value="{{newProduct.description}}">
               </div>
-            </div>
 
 
-            <div class="row">
-              <div class="col-sm-3 "></div>
-              <div class="col-sm-9 text-secondary">
-                <button class="btn btn-danger px-4">Create</button>
+              <div class="row mb-3">
+                <div class="col-sm-3  d-flex align-items-center">
+                  <h6 class="mb-0">Image:</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <input name="images" type="file" accept="image/png, image/jpg, image/jpeg, image/gif, image/bmp"
+                    class="form-control" value="{{newProduct.images}}" multiple>
+                </div>
               </div>
-            </div>
+
+
+              <div class="row">
+                <div class="col-sm-3 "></div>
+                <div class="col-sm-9 text-secondary">
+                  <button class="btn btn-danger px-4">Create</button>
+                </div>
+              </div>
 
         </form>
 
